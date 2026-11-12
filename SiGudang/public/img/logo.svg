@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+    <defs>
+        <!-- Primary Orange Linear Gradient -->
+        <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFA726" />
+            <stop offset="50%" stop-color="#FB8C00" />
+            <stop offset="100%" stop-color="#E65100" />
+        </linearGradient>
+
+        <!-- Subtle Top Face Gradient -->
+        <linearGradient id="topFaceGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFE0B2" />
+            <stop offset="100%" stop-color="#FFFFFF" />
+        </linearGradient>
+
+        <!-- Left Face Gradient -->
+        <linearGradient id="leftFaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FB8C00" />
+            <stop offset="100%" stop-color="#EF6C00" />
+        </linearGradient>
+
+        <!-- Right Face Gradient -->
+        <linearGradient id="rightFaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E65100" />
+            <stop offset="100%" stop-color="#BF360C" />
+        </linearGradient>
+
+        <!-- Shadow filter -->
+        <filter id="shadowFilter" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#E65100" flood-opacity="0.35" />
+        </filter>
+    </defs>
+
+    <!-- Base Rounded Container Badge -->
+    <rect x="8" y="8" width="104" height="104" rx="26" fill="url(#primaryGrad)" filter="url(#shadowFilter)" />
+
+    <!-- Isometric Warehouse + Smart Inventory Box Emblem -->
+    <g transform="translate(60, 60)">
+        <!-- Top Face of Warehouse / Main Cube -->
+        <polygon points="0,-34 32,-16 0,2 -32,-16" fill="url(#topFaceGrad)" opacity="0.95" />
+
+        <!-- Left Face of Warehouse -->
+        <polygon points="-32,-16 0,2 0,38 -32,20" fill="url(#leftFaceGrad)" />
+
+        <!-- Right Face of Warehouse -->
+        <polygon points="0,2 32,-16 32,20 0,38" fill="url(#rightFaceGrad)" />
+
+        <!-- Top Roof Crease / Grid Accent -->
+        <line x1="0" y1="-34" x2="0" y2="2" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+        <line x1="-32" y1="-16" x2="0" y2="2" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.5" />
+        <line x1="32" y1="-16" x2="0" y2="2" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.5" />
+
+        <!-- Warehouse Left Shelving Stripes -->
+        <path d="M-24,-4 L-8,6 M-24,4 L-8,14 M-24,12 L-8,22" stroke="#FFE0B2" stroke-width="2.5" stroke-linecap="round" opacity="0.85" />
+
+        <!-- Warehouse Right Rolling Shutter Door -->
+        <polygon points="6,6 26,-4 26,16 6,26" fill="#263238" opacity="0.9" />
+        <line x1="6" y1="11" x2="26" y2="1" stroke="#FFA726" stroke-width="1.5" opacity="0.7" />
+        <line x1="6" y1="16" x2="26" y2="6" stroke="#FFA726" stroke-width="1.5" opacity="0.7" />
+        <line x1="6" y1="21" x2="26" y2="11" stroke="#FFA726" stroke-width="1.5" opacity="0.7" />
+
+        <!-- Foreground Dynamic Floating Mini Package / Box -->
+        <g transform="translate(14, 16) scale(0.48)">
+            <polygon points="0,-24 24,-10 0,4 -24,-10" fill="#FFFFFF" />
+            <polygon points="-24,-10 0,4 0,30 -24,16" fill="#FFE0B2" />
+            <polygon points="0,4 24,-10 24,16 0,30" fill="#FFB74D" />
+            <!-- Box tape line -->
+            <path d="M0,-24 L0,4 M-24,-10 L24,-10" stroke="#FB8C00" stroke-width="3" stroke-linecap="round" opacity="0.9" />
+        </g>
+    </g>
+
+    <!-- Subdued Tech Dot in Top Left -->
+    <circle cx="26" cy="26" r="4" fill="#FFFFFF" opacity="0.7" />
+    <circle cx="38" cy="26" r="2.5" fill="#FFFFFF" opacity="0.4" />
+</svg>

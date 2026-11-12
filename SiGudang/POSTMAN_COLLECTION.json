@@ -1,0 +1,401 @@
+{
+  "info": {
+    "_postman_id": "sigudang-036-uts-2026",
+    "name": "SiGudang – 036 API Collection",
+    "description": "Koleksi Postman RESTful API untuk Ujian Tengah Semester (UTS) SiGudang – 036 oleh Leonard Sihol Pardede (25K10036).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "bearer_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "barang_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Login (Manajer Utama)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.success && jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('bearer_token', jsonData.data.token);",
+                  "    console.log('Bearer Token berhasil disimpan:', jsonData.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"25K10036\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": ["{{base_url}}"],
+              "path": ["login"]
+            }
+          }
+        },
+        {
+          "name": "Login (Staf Gudang)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"staf036\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": ["{{base_url}}"],
+              "path": ["login"]
+            }
+          }
+        },
+        {
+          "name": "Get Me (Profile Login)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/me",
+              "host": ["{{base_url}}"],
+              "path": ["me"]
+            }
+          }
+        },
+        {
+          "name": "Logout (Revoke Token)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/logout",
+              "host": ["{{base_url}}"],
+              "path": ["logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Identitas Pembuat (WAJIB)",
+      "item": [
+        {
+          "name": "GET Identitas Pembuat Aplikasi",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/identitas",
+              "host": ["{{base_url}}"],
+              "path": ["identitas"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Manajemen Barang",
+      "item": [
+        {
+          "name": "Get All Barang",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/barang",
+              "host": ["{{base_url}}"],
+              "path": ["barang"]
+            }
+          }
+        },
+        {
+          "name": "Get Detail Barang",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/barang/{{barang_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["barang", "{{barang_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Barang Baru",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kode_barang\": \"BRG-006\",\n  \"nama_barang\": \"Timbangan Digital Industri 100kg\",\n  \"kategori\": \"Alat Berat & Handling\",\n  \"satuan\": \"Unit\",\n  \"stok\": 12,\n  \"stok_minimum\": 5,\n  \"lokasi_penyimpanan\": \"Zona Docking C-02\",\n  \"supplier_id\": 2,\n  \"deskripsi\": \"Timbangan duduk digital presisi kalibrasi standar ISO\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/barang",
+              "host": ["{{base_url}}"],
+              "path": ["barang"]
+            }
+          }
+        },
+        {
+          "name": "Update Barang (Full PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kode_barang\": \"BRG-001\",\n  \"nama_barang\": \"Barcode Scanner Wireless 2D Ultra HD\",\n  \"kategori\": \"Elektronik & Perangkat\",\n  \"satuan\": \"Unit\",\n  \"stok_minimum\": 12,\n  \"lokasi_penyimpanan\": \"Rak A-01-A\",\n  \"supplier_id\": 3,\n  \"deskripsi\": \"Versi pembaruan sensor scanner optik\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/barang/1",
+              "host": ["{{base_url}}"],
+              "path": ["barang", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Barang (Manajer Saja)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/barang/6",
+              "host": ["{{base_url}}"],
+              "path": ["barang", "6"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Manajemen Supplier",
+      "item": [
+        {
+          "name": "Get All Supplier",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/supplier",
+              "host": ["{{base_url}}"],
+              "path": ["supplier"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Manajemen Mutasi Stok",
+      "item": [
+        {
+          "name": "Get All Mutasi Stok",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mutasi",
+              "host": ["{{base_url}}"],
+              "path": ["mutasi"]
+            }
+          }
+        },
+        {
+          "name": "Create Mutasi Masuk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"barang_id\": 1,\n  \"tipe_mutasi\": \"masuk\",\n  \"jumlah\": 10,\n  \"tanggal_mutasi\": \"2026-03-20 14:00:00\",\n  \"keterangan\": \"Penerimaan tambahan stok via REST API\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/mutasi",
+              "host": ["{{base_url}}"],
+              "path": ["mutasi"]
+            }
+          }
+        },
+        {
+          "name": "Create Mutasi Keluar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{bearer_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"barang_id\": 1,\n  \"tipe_mutasi\": \"keluar\",\n  \"jumlah\": 5,\n  \"tanggal_mutasi\": \"2026-03-20 15:30:00\",\n  \"keterangan\": \"Pengeluaran stok via REST API\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/mutasi",
+              "host": ["{{base_url}}"],
+              "path": ["mutasi"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
